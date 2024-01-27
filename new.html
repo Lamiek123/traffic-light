@@ -1,0 +1,107 @@
+            <!DOCTYPE html>
+            <html>
+            <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+
+            </head>
+            <body>
+
+            <h1>Range Slider</h1>
+            <p>Drag the slider to display the current value.</p>
+
+            <div class="slidecontainer">
+              <input type="range" min="-65000" max="65000" value="0" class="slider" id="myRange">
+              <p>Input Value: <span id="demo"></span></p>
+              <p>Change Value: <span id="cdemo"></span></p>
+            </div>
+            
+            <h1>Range BSlider</h1>
+            <p>Drag the Bslider to display the current value.</p>
+
+            <div class="slidecontainer">
+              <input type="range" min="-65000" max="65000" value="0" class="slider" id="BmyRange">
+              <p>Input Value: <span id="Bdemo"></span></p>
+              <p>Change Value: <span id="Dcdemo"></span></p>
+            </div>
+            
+            
+            <h1>Range servoSlider</h1>
+            <p>Drag the servoslider to display the current value.</p>
+
+            <div class="slidecontainer">
+              <input type="range" min="-65000" max="65000" value="0" class="slider" id="servomyRange">
+              <p>Input Value: <span id="servodemo"></span></p>
+              <p>Change Value: <span id="Dservocdemo"></span></p>
+            </div>
+            
+
+            <script>
+            var slider = document.getElementById("myRange");
+            var output = document.getElementById("demo");
+            var coutput = document.getElementById("cdemo");
+            output.innerHTML = slider.value;
+
+            slider.oninput = function() {{
+              output.innerHTML = this.value;
+
+            }}
+            slider.onchange = function() {{
+              coutput.innerHTML = this.value;
+              var xhr = new XMLHttpRequest();
+              xhr.open("GET", "/slider?"+this.value, true);
+              xhr.send();
+            }}
+  
+            var Bslider = document.getElementById("BmyRange");
+            var Boutput = document.getElementById("Bdemo");
+            var Bcoutput = document.getElementById("Dcdemo");
+            Boutput.innerHTML = Bslider.value;
+
+            Bslider.oninput = function() {{
+              Boutput.innerHTML = this.value;
+
+            }}
+            Bslider.onchange = function() {{
+              Bcoutput.innerHTML = this.value;
+              var xhr = new XMLHttpRequest();
+              xhr.open("GET", "/Bslider?"+this.value, true);
+              xhr.send();
+            }}
+            
+            #servo
+            var servoslider = document.getElementById("servomyRange");
+            var servooutput = document.getElementById("servodemo");
+            var servocoutput = document.getElementById("Dservocdemo");
+            Boutput.innerHTML = servoslider.value;
+
+            servoslider.oninput = function() {{
+              servooutput.innerHTML = this.value;
+
+            }}
+            servoslider.onchange = function() {{
+              servocoutput.innerHTML = this.value;
+              var xhr = new XMLHttpRequest();
+              xhr.open("GET", "/servoslider?"+this.value, true);
+              xhr.send();
+            }}
+            
+            
+            </script>
+            
+            
+            
+
+
+            </body>
+            
+            <style>
+            .slider {
+             width: 100%;
+             }
+            </style>
+            
+            </html>
+            
+            
+            
+  
