@@ -1,10 +1,11 @@
 import network
 import socket
 from time import sleep
-from battlebot2 import *
+from battlebot3 import *
+from Slow_Servo import *
 import machine
 
-page = open("index.html", "r")
+page = open("index1.html", "r")
 html = page.read()
 #print(html);
 page.close()
@@ -35,8 +36,7 @@ def open_socket(ip):
     return connection
 
 def serve(connection):
-    #Start a web server
-    #servo1 = slow_servo.Slow_Servo(1)	#create servo object on pin 0
+    
     while True:
         client = connection.accept()[0]
         request = client.recv(1024)
@@ -66,12 +66,13 @@ def serve(connection):
             else:
                 move_right_backward()
                 setBSpeed(-Bslider_val)
+                
+                
+        elif request.find('servoslider') > -1:
+            servoslider_val = request.split('?')[1]
+            print (servoslider_val)
+            servo1 .set_angle(servoslider_val,1000)
 
-            
-            
-            
-#             servo1.set_angle(slider_val,1000)
-       # html = page()
         client.send('HTTP/1.0 200 OK\r\nContent-type: text/html\r\n\r\n')
         client.send(html)
         client.close()
@@ -79,7 +80,7 @@ def serve(connection):
 
 try:
     ip = connect()
-    connection = open_socket(ip)
-    serve(connection)
+  
+    serve(open_socket(ip))
 except KeyboardInterrupt:
     machine.reset()
