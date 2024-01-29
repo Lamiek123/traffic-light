@@ -24,6 +24,16 @@
               <p>Change Value: <span id="Dcdemo"></span></p>
             </div>
             
+            
+            <h1>Range servoSlider</h1>
+            <p>Drag the servoslider to display the current value.</p>
+
+            <div class="slidecontainer">
+              <input type="range" min="0" max="180" value="90" class="slider" id="servomyRange">
+              <p>Input Value: <span id="servodemo"></span></p>
+              <p>Change Value: <span id="servocdemo"></span></p>
+            </div>
+            
 
             <script>
             var slider = document.getElementById("myRange");
@@ -57,7 +67,28 @@
               xhr.open("GET", "/Bslider?"+this.value, true);
               xhr.send();
             }}
+            
+            var servoslider = document.getElementById("servomyRange");
+            var servooutput = document.getElementById("servodemo");
+            var servocoutput = document.getElementById("servocdemo");
+            servooutput.innerHTML = servoslider.value;
+
+            servoslider.oninput = function() {{
+              servooutput.innerHTML = this.value;
+
+            }}
+            servoslider.onchange = function() {{
+              servocoutput.innerHTML = this.value;
+              var xhr = new XMLHttpRequest();
+              xhr.open("GET", "/servoslider?"+this.value, true);
+              xhr.send();
+            }}
+            
+            
             </script>
+            
+            
+            
 
 
             </body>
